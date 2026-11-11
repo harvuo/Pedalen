@@ -2,252 +2,446 @@
 /* Variabler på :root gäller hela sidan. Använd dem med var(--namn).
       Vill du byta utseende ändrar du bara här, inte på 50 ställen längre ned. */
 :root {
-    /* Kontrastkvoter är uppmätta. Krav: minst 4,5:1 för vanlig text */
-    --color-bg: #f5f6f0;
-    --color-surface: #ffffff;
-    --color-ink: #101a14; /* 16:1 mot bakgrunden */
-    --color-muted: #4b5a50; /* 6,7:1 mot bakgrunden */
-    --color-primary: #14532d; /* 8,4:1 mot bakgrunden, 9,1:1 med vit text på */
-    --color-deep: #0d1b14; /* mörk bakgrund för hero och kontakt */
-    --color-accent: #c8f03c; /* limegrön. Mörk text på den: 13,5:1 */
-    --color-tint: #e9ede3; /* ljus grön-grå, för varannan sektion */
-    --color-line: #d6dccf; /* tunna linjer och ramar */
+  /* Kontrastkvoter är uppmätta. Krav: minst 4,5:1 för vanlig text */
+  --color-bg: #F5F6F0;
+  --color-surface: #FFFFFF;
+  --color-ink: #101A14;       /* 16:1 mot bakgrunden */
+  --color-muted: #4B5A50;     /* 6,7:1 mot bakgrunden */
+  --color-primary: #14532D;   /* 8,4:1 mot bakgrunden, 9,1:1 med vit text på */
+  --color-deep: #0D1B14;      /* mörk bakgrund för hero och kontakt */
+  --color-accent: #C8F03C;    /* limegrön. Mörk text på den: 13,5:1 */
+  --color-tint: #E9EDE3;  /* ljus grön-grå, för varannan sektion */
+  --color-line: #D6DCCF;  /* tunna linjer och ramar */
 
-    --font-body:
-        system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; /* systemets eget typsnitt: snabbt, ingen nedladdning, ser inhemskt ut */
+  --font-body: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;  /* systemets eget typsnitt: snabbt, ingen nedladdning, ser inhemskt ut */
 
-    --space-1: 0.5rem; /* avståndsskala i rem: 1rem = webbläsarens textstorlek (normalt 16 px), så siffrorna nedan gäller vid standardinställning */
-    --space-2: 1rem; /* 16 px */
-    --space-3: 1.5rem; /* 24 px */
-    --space-4: 2rem; /* 32 px */
-    --space-5: 3rem; /* 48 px */
-    --space-6: 5rem; /* 80 px, för sektionernas luft */
+  --space-1: 0.5rem;  /* avståndsskala i rem: 1rem = webbläsarens textstorlek (normalt 16 px), så siffrorna nedan gäller vid standardinställning */
+  --space-2: 1rem;  /* 16 px */
+  --space-3: 1.5rem;  /* 24 px */
+  --space-4: 2rem;  /* 32 px */
+  --space-5: 3rem;  /* 48 px */
+  --space-6: 5rem;  /* 80 px, för sektionernas luft */
 
-    --radius: 1.25rem; /* rundade hörn på kort */
-    --radius-lg: 2rem; /* större rundning, för bilden */
-    --shadow: 0 0.5rem 2rem rgba(16, 26, 20, 0.1); /* skugga: x y suddighet färg (0.1 = 10 % täckning) */
-    --text-hero: clamp(
-        2.5rem,
-        6vw,
-        4.5rem
-    ); /* clamp(minst, ideal, störst): växer med fönstret */
-    --max-width: 70rem; /* innehållets maxbredd */
+  --radius: 1.25rem;  /* rundade hörn på kort */
+  --radius-lg: 2rem;  /* större rundning, för bilden */
+  --shadow: 0 0.5rem 2rem rgba(16, 26, 20, 0.1);  /* skugga: x y suddighet färg (0.1 = 10 % täckning) */
+  --text-hero: clamp(2.5rem, 6vw, 4.5rem);  /* clamp(minst, ideal, störst): växer med fönstret */
+  --max-width: 70rem;  /* innehållets maxbredd */
 }
 
 /* ===== Grundstil ===== */
 /* Stjärnan väljer ALLA element. border-box gör att padding och ram räknas in i bredden,
       så att en ruta med width: 100% inte sticker ut. Nästan alla projekt börjar med den här. */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
 /* Så att länkar i menyn inte hamnar under den fasta headern */
 /* scroll-padding-top: när man hoppar till en ankarlänk (#priser) stannar sidan
       5rem före rubriken, så att den fasta headern inte döljer den. */
-html {
-    scroll-padding-top: 5rem;
-}
+html { scroll-padding-top: 5rem; }
 
 /* body ärver alla barn: typsnitt, färg och radavstånd som sätts här gäller överallt
       om inget annat anges. line-height 1.6 gör brödtext lättläst. */
 body {
-    margin: 0; /* nollställ webbläsarens standardmarginal */
-    font-family: var(
-        --font-body
-    ); /* typsnitt (först i listan som finns används) */
-    font-size: 1.0625rem; /* textstorlek */
-    line-height: 1.6; /* radavstånd (utan enhet = gånger textstorleken) */
-    color: var(--color-ink); /* textfärg */
-    background: var(--color-bg); /* bakgrund */
+  margin: 0;  /* nollställ webbläsarens standardmarginal */
+  font-family: var(--font-body);  /* typsnitt (först i listan som finns används) */
+  font-size: 1.0625rem;  /* textstorlek */
+  line-height: 1.6;  /* radavstånd (utan enhet = gånger textstorleken) */
+  color: var(--color-ink);  /* textfärg */
+  background: var(--color-bg);  /* bakgrund */
 }
 
 /* Bilder får aldrig bli bredare än sin ruta. height: auto behåller proportionerna.
       display: block tar bort det lilla glapp som annars hamnar under en bild. */
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
+img { max-width: 100%; height: auto; display: block; }
 
 /* Gemensam stil för alla rubriker. Komma betyder 'och': samma regel till flera väljare.
       text-wrap: balance jämnar ut radbrytningarna så att rubriken inte slutar på ett ensamt ord. */
-h1,
-h2,
-h3 {
-    line-height: 1.1; /* radavstånd (utan enhet = gånger textstorleken) */
-    letter-spacing: -0.02em; /* avstånd mellan bokstäver (negativt = tätare) */
-    text-wrap: balance; /* jämnar ut radbrytningar */
-    margin: 0 0 var(--space-2); /* luft UTANFÖR elementet (kort form: upp höger ned vänster) */
+h1, h2, h3 {
+  line-height: 1.1;  /* radavstånd (utan enhet = gånger textstorleken) */
+  letter-spacing: -0.02em;  /* avstånd mellan bokstäver (negativt = tätare) */
+  text-wrap: balance;  /* jämnar ut radbrytningar */
+  margin: 0 0 var(--space-2);  /* luft UTANFÖR elementet (kort form: upp höger ned vänster) */
 }
 /* Storleken på h1 sätts längre ned (.hero h1) med clamp(). Här bara tjockleken. */
-h1 {
-    font-weight: 800;
-}
+h1 { font-weight: 800; }
 /* clamp(min, ideal, max): storleken följer fönsterbredden (4vw) men håller sig
       mellan 1,9rem och 2,6rem. Ger fluid text utan media queries. */
-h2 {
-    font-size: clamp(1.9rem, 4vw, 2.6rem);
-    font-weight: 800;
-}
-h3 {
-    font-size: 1.35rem;
-    font-weight: 700;
-}
-p {
-    margin: 0 0 var(--space-2);
-}
+h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 800; }
+h3 { font-size: 1.35rem; font-weight: 700; }
+p { margin: 0 0 var(--space-2); }
 
 /* Länkar får primärfärgen. Understrykningen får vara kvar så att länkar syns utan färg. */
-a {
-    color: var(--color-primary);
-}
+a { color: var(--color-primary); }
 
 /* Fokusmarkering. Mörka sektioner byter färg via variabeln --focus */
 /* VIKTIGT för tillgänglighet. Visas bara när man navigerar med tangentbordet.
       Ta aldrig bort den utan att ersätta den. var(--focus, X) betyder: använd --focus om den finns, annars X. */
 :focus-visible {
-    outline: 3px solid var(--focus, var(--color-primary)); /* ram utanför elementet som inte påverkar layouten */
-    outline-offset: 3px; /* avstånd mellan elementet och ramen */
+  outline: 3px solid var(--focus, var(--color-primary));  /* ram utanför elementet som inte påverkar layouten */
+  outline-offset: 3px;  /* avstånd mellan elementet och ramen */
 }
 /* På mörk bakgrund byter vi fokusfärg till limegrön. Det räcker att ändra variabeln,
       regeln ovan använder den automatiskt. */
-.on-dark {
-    --focus: var(--color-accent);
-}
+.on-dark { --focus: var(--color-accent); }
 
 /* Centrerar innehållet. min(100% - 2rem, 70rem) betyder: nästan full bredd på mobil
       (med 1rem marginal per sida) men aldrig bredare än 70rem. margin-inline: auto centrerar. */
 .container {
-    width: min(100% - 2rem, var(--max-width)); /* bredd */
-    margin-inline: auto; /* auto på båda sidor centrerar blocket */
+  width: min(100% - 2rem, var(--max-width));  /* bredd */
+  margin-inline: auto;  /* auto på båda sidor centrerar blocket */
 }
 
 /* Varje sektion får luft upptill och nedtill. */
-.section {
-    padding-block: var(--space-6);
-}
+.section { padding-block: var(--space-6); }
 /* Modifierare (BEM): läggs till som andra klass för att byta bakgrund på en sektion. */
-.section--tint {
-    background: var(--color-tint);
-}
+.section--tint { background: var(--color-tint); }
 /* Elementnamn med två understreck (BEM) visar vad klassen tillhör: intro i en section. */
-.section__intro {
-    color: var(--color-muted);
-    margin-bottom: var(--space-4);
-}
+.section__intro { color: var(--color-muted); margin-bottom: var(--space-4); }
 
 /* Hoppa-länken göms utanför skärmen (inte display: none, då hittar skärmläsare den inte). */
 .skip {
-    position: absolute; /* placeras fritt inuti närmaste förälder med position */
-    left: -999px; /* avstånd från vänsterkanten */
-    background: var(--color-ink); /* bakgrund */
-    color: #fff; /* textfärg */
-    padding: var(--space-1) var(--space-2); /* luft INUTI elementet */
-    z-index: 100; /* stapelordning, högst ligger överst */
+  position: absolute;  /* placeras fritt inuti närmaste förälder med position */
+  left: -999px;  /* avstånd från vänsterkanten */
+  background: var(--color-ink);  /* bakgrund */
+  color: #fff;  /* textfärg */
+  padding: var(--space-1) var(--space-2);  /* luft INUTI elementet */
+  z-index: 100;  /* stapelordning, högst ligger överst */
 }
 /* När den får fokus med Tab flyttas den in i bild. */
-.skip:focus {
-    left: var(--space-2);
-    top: var(--space-2);
-}
+.skip:focus { left: var(--space-2); top: var(--space-2); }
 
 /* ===== Sidhuvud ===== */
 /* position: sticky fäster headern upptill när man scrollar. backdrop-filter suddar ut
       det som ligger bakom. rgb(... / 0.88) är en färg med 88 % täckning. */
 .header {
-    position: sticky; /* fastnar upptill när man scrollar förbi */
-    top: 0; /* avstånd från överkanten */
-    z-index: 10; /* stapelordning, högst ligger överst */
-    background: rgb(245 246 240 / 0.88); /* bakgrund */
-    backdrop-filter: blur(12px); /* filter på det som ligger bakom elementet */
-    border-bottom: 1px solid var(--color-line); /* linje under */
+  position: sticky;  /* fastnar upptill när man scrollar förbi */
+  top: 0;  /* avstånd från överkanten */
+  z-index: 10;  /* stapelordning, högst ligger överst */
+  background: rgb(245 246 240 / 0.88);  /* bakgrund */
+  backdrop-filter: blur(12px);  /* filter på det som ligger bakom elementet */
+  border-bottom: 1px solid var(--color-line);  /* linje under */
 }
 /* Flexbox: logga till vänster och meny till höger på samma rad. */
 .header__inner {
-    display: flex; /* barnen läggs på en rad (flexbox) */
-    align-items: center; /* centrerar lodrätt */
-    justify-content: space-between; /* så långt isär som möjligt */
-    gap: var(--space-3); /* avstånd mellan barnen */
-    padding-block: var(--space-1); /* luft inuti, upptill och nedtill */
+  display: flex;  /* barnen läggs på en rad (flexbox) */
+  align-items: center;  /* centrerar lodrätt */
+  justify-content: space-between;  /* så långt isär som möjligt */
+  gap: var(--space-3);  /* avstånd mellan barnen */
+  padding-block: var(--space-1);  /* luft inuti, upptill och nedtill */
 }
 /* Loggan är en länk till startsidan, utan understrykning. */
 .logo {
-    font-size: 1.5rem; /* textstorlek */
-    font-weight: 800; /* tjocklek: 400 normal, 700 fet, 800 extra fet */
-    letter-spacing: -0.03em; /* avstånd mellan bokstäver (negativt = tätare) */
-    color: var(--color-ink); /* textfärg */
-    text-decoration: none; /* tar bort understrykning */
+  font-size: 1.5rem;  /* textstorlek */
+  font-weight: 800;  /* tjocklek: 400 normal, 700 fet, 800 extra fet */
+  letter-spacing: -0.03em;  /* avstånd mellan bokstäver (negativt = tätare) */
+  color: var(--color-ink);  /* textfärg */
+  text-decoration: none;  /* tar bort understrykning */
 }
 /* ::after skapar ett extra element efter loggan utan att röra HTML. Här en liten prick.
       content: "" krävs för att det ska visas. */
 .logo::after {
-    content: ''; /* texten som ::before/::after visar */
-    display: inline-block; /* ligger i textflödet men kan ha storlek och luft */
-    width: 0.5rem; /* bredd */
-    height: 0.5rem; /* höjd */
-    margin-left: 0.2rem; /* luft till vänster */
-    border-radius: 50%; /* rundade hörn (50 % = cirkel, 999px = piller) */
-    background: var(--color-primary); /* bakgrund */
+  content: "";  /* texten som ::before/::after visar */
+  display: inline-block;  /* ligger i textflödet men kan ha storlek och luft */
+  width: 0.5rem;  /* bredd */
+  height: 0.5rem;  /* höjd */
+  margin-left: 0.2rem;  /* luft till vänster */
+  border-radius: 50%;  /* rundade hörn (50 % = cirkel, 999px = piller) */
+  background: var(--color-primary);  /* bakgrund */
 }
 /* Menyn är en lista (ul). Vi tar bort punkterna och lägger länkarna på en rad. */
 .nav {
-    display: flex; /* barnen läggs på en rad (flexbox) */
-    gap: var(--space-2); /* avstånd mellan barnen */
-    list-style: none; /* tar bort punkter och siffror */
-    margin: 0; /* nollställ webbläsarens standardmarginal */
-    padding: 0; /* luft INUTI elementet */
+  display: flex;  /* barnen läggs på en rad (flexbox) */
+  gap: var(--space-2);  /* avstånd mellan barnen */
+  list-style: none;  /* tar bort punkter och siffror */
+  margin: 0;  /* nollställ webbläsarens standardmarginal */
+  padding: 0;  /* luft INUTI elementet */
 }
 /* Stor klickyta: padding gör att man kan träffa länken med tummen.
       Den ligger på a, inte på li, så att hela ytan är klickbar. */
 .nav a {
-    display: inline-block; /* ligger i textflödet men kan ha storlek och luft */
-    padding: 0.5rem 0.75rem; /* större träffyta */
-    border-radius: 999px; /* rundade hörn (50 % = cirkel, 999px = piller) */
-    color: var(--color-ink); /* textfärg */
-    text-decoration: none; /* tar bort understrykning */
-    font-weight: 600; /* tjocklek: 400 normal, 700 fet, 800 extra fet */
+  display: inline-block;  /* ligger i textflödet men kan ha storlek och luft */
+  padding: 0.5rem 0.75rem;   /* större träffyta */
+  border-radius: 999px;  /* rundade hörn (50 % = cirkel, 999px = piller) */
+  color: var(--color-ink);  /* textfärg */
+  text-decoration: none;  /* tar bort understrykning */
+  font-weight: 600;  /* tjocklek: 400 normal, 700 fet, 800 extra fet */
 }
 /* :hover = när musen är över. Det får aldrig vara det enda tecknet på att något är klickbart. */
-.nav a:hover {
-    background: var(--color-tint);
-}
+.nav a:hover { background: var(--color-tint); }
 
 /* ===== Knappar ===== */
 /* Basen för alla knappar. De är länkar (a) som ser ut som knappar.
       Transparent ram nu, så att knappen inte hoppar när ramen får färg på hover. */
 .btn {
-    display: inline-block; /* ligger i textflödet men kan ha storlek och luft */
-    padding: 0.85rem 1.6rem; /* luft INUTI elementet */
-    border-radius: 999px; /* rundade hörn (50 % = cirkel, 999px = piller) */
-    font-weight: 700; /* tjocklek: 400 normal, 700 fet, 800 extra fet */
-    text-decoration: none; /* tar bort understrykning */
-    border: 2px solid transparent; /* ram: tjocklek stil färg */
+  display: inline-block;  /* ligger i textflödet men kan ha storlek och luft */
+  padding: 0.85rem 1.6rem;  /* luft INUTI elementet */
+  border-radius: 999px;  /* rundade hörn (50 % = cirkel, 999px = piller) */
+  font-weight: 700;  /* tjocklek: 400 normal, 700 fet, 800 extra fet */
+  text-decoration: none;  /* tar bort understrykning */
+  border: 2px solid transparent;  /* ram: tjocklek stil färg */
 }
 /* Variant: fylld limegrön knapp med mörk text (kontrast 13,5:1). */
-.btn--primary {
-    background: var(--color-accent);
-    color: var(--color-ink);
-}
+.btn--primary { background: var(--color-accent); color: var(--color-ink); }
 /* Lite ljusare vid hover. */
-.btn--primary:hover {
-    background: #d6f76a;
-}
+.btn--primary:hover { background: #D6F76A; }
 /* Variant: bara en ram, för mörk bakgrund. */
-.btn--ghost {
-    border-color: rgb(255 255 255 / 0.6);
-    color: #fff;
-}
+.btn--ghost { border-color: rgb(255 255 255 / 0.6); color: #fff; }
 /* Svag fyllning vid hover. */
-.btn--ghost:hover {
-    border-color: #fff;
-    background: rgb(255 255 255 / 0.1);
-}
+.btn--ghost:hover { border-color: #fff; background: rgb(255 255 255 / 0.1); }
 /* Knapprad. flex-wrap låter knapparna hamna under varandra när det är trångt. */
-.actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    margin: 0;
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: 0; }
+
+/* ===== Hero ===== */
+/* Flera bakgrunder, kommaseparerade: överst en ljusgrön 'glöd' (radial-gradient),
+      underst en enfärgad mörk. Texten blir vit, kontrasten 17,7:1. */
+.hero {
+  background:
+    radial-gradient(60rem 30rem at 85% 20%, rgb(200 240 60 / 0.16), transparent 60%),
+    var(--color-deep);
+  color: #fff;  /* textfärg */
+  padding-block: var(--space-5) var(--space-6);  /* luft inuti, upptill och nedtill */
+}
+/* Det viktigaste grid-mönstret: repeat(auto-fit, minmax(20rem, 1fr)).
+      Text och bild ligger bredvid varandra när det ryms två kolumner à 20rem,
+      annars under varandra. Ingen media query behövs. */
+.hero__inner {
+  display: grid;  /* barnen läggs i ett rutnät */
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));  /* så många kolumner som ryms, var och en minst så bred som minmax anger */
+  align-items: center;  /* centrerar lodrätt */
+  gap: var(--space-5);  /* avstånd mellan barnen */
+}
+/* Rubrikens storlek: clamp(2,5rem, 6vw, 4,5rem). Se variabeln --text-hero. */
+.hero h1 { font-size: var(--text-hero); }
+/* Liten etikett ovanför rubriken. inline-block gör att bakgrunden bara täcker texten. */
+.eyebrow {
+  display: inline-block;  /* ligger i textflödet men kan ha storlek och luft */
+  padding: 0.35rem 0.9rem;  /* luft INUTI elementet */
+  border-radius: 999px;  /* rundade hörn (50 % = cirkel, 999px = piller) */
+  background: rgb(200 240 60 / 0.14);  /* bakgrund */
+  color: var(--color-accent);  /* textfärg */
+  font-size: 0.85rem;  /* textstorlek */
+  font-weight: 700;  /* tjocklek: 400 normal, 700 fet, 800 extra fet */
+  letter-spacing: 0.08em;  /* avstånd mellan bokstäver (negativt = tätare) */
+  text-transform: uppercase;  /* VERSALER utan att skriva dem i HTML */
+}
+/* Ingressen. max-width i rem begränsar radlängden, 32rem är ungefär 60 tecken. */
+.lead { font-size: 1.25rem; color: #D5E0D8; max-width: 32rem; margin-bottom: var(--space-4); }
+
+/* relative: referenspunkt för märket (.badge) som placeras absolut inuti. */
+.hero__media { position: relative; margin: 0; }
+/* aspect-ratio: 4/5 ger fast form oavsett bildens mått. object-fit: cover beskär
+      bilden så att den fyller rutan utan att bli utdragen. */
+.hero__media img {
+  width: 100%;  /* bredd */
+  aspect-ratio: 4 / 5;  /* fast förhållande mellan bredd och höjd */
+  object-fit: cover;  /* bilden fyller rutan och beskärs i stället för att dras ut */
+  border-radius: var(--radius-lg);  /* rundade hörn (50 % = cirkel, 999px = piller) */
+  box-shadow: 0 1.5rem 4rem rgb(0 0 0 / 0.5);  /* skugga: x y suddighet färg */
+}
+/* position: absolute placerar märket relativt .hero__media: 1,5rem från vänster och nederkant. */
+.badge {
+  position: absolute;  /* placeras fritt inuti närmaste förälder med position */
+  left: var(--space-3);  /* avstånd från vänsterkanten */
+  bottom: var(--space-3);  /* avstånd från nederkanten */
+  padding: 0.6rem 1.1rem;  /* luft INUTI elementet */
+  border-radius: 999px;  /* rundade hörn (50 % = cirkel, 999px = piller) */
+  background: var(--color-accent);  /* bakgrund */
+  color: var(--color-ink);  /* textfärg */
+  font-weight: 700;  /* tjocklek: 400 normal, 700 fet, 800 extra fet */
+  box-shadow: var(--shadow);  /* skugga: x y suddighet färg */
+}
+
+/* ===== Nyckeltal ===== */
+/* Remsa med nyckeltal under hero. */
+.stats { background: var(--color-surface); border-bottom: 1px solid var(--color-line); }
+/* auto-fit-grid igen, men med smalare kolumner (12rem). */
+.stats__list {
+  display: grid;  /* barnen läggs i ett rutnät */
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));  /* så många kolumner som ryms, var och en minst så bred som minmax anger */
+  gap: var(--space-3);  /* avstånd mellan barnen */
+  list-style: none;  /* tar bort punkter och siffror */
+  margin: 0;  /* nollställ webbläsarens standardmarginal */
+  padding: var(--space-4) 0;  /* luft INUTI elementet */
+}
+/* Beskrivningstexten i dämpad färg (kontrast 6,7:1). */
+.stats__list li { color: var(--color-muted); }
+/* Siffran blir en egen rad och större. strong är semantiskt viktig text, inte bara fet. */
+.stats__list strong {
+  display: block;  /* egen rad, tar full bredd */
+  font-size: 1.75rem;  /* textstorlek */
+  font-weight: 800;  /* tjocklek: 400 normal, 700 fet, 800 extra fet */
+  letter-spacing: -0.02em;  /* avstånd mellan bokstäver (negativt = tätare) */
+  color: var(--color-primary);  /* textfärg */
+}
+
+/* ===== Tjänstekort ===== */
+/* Tjänstekorten. minmax(16rem, 1fr): varje kort minst 16rem, och de delar på resten. */
+.cards {
+  display: grid;  /* barnen läggs i ett rutnät */
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));  /* så många kolumner som ryms, var och en minst så bred som minmax anger */
+  gap: var(--space-3);  /* avstånd mellan barnen */
+  list-style: none;  /* tar bort punkter och siffror */
+  margin: 0;  /* nollställ webbläsarens standardmarginal */
+  padding: 0;  /* luft INUTI elementet */
+}
+/* flex med column gör att innehållet staplas, vilket behövs för nästa trick (.card__meta). */
+.card {
+  display: flex;  /* barnen läggs på en rad (flexbox) */
+  flex-direction: column;  /* staplar barnen lodrätt */
+  background: var(--color-surface);  /* bakgrund */
+  border: 1px solid var(--color-line);  /* ram: tjocklek stil färg */
+  border-radius: var(--radius);  /* rundade hörn (50 % = cirkel, 999px = piller) */
+  padding: var(--space-4) var(--space-3);  /* luft INUTI elementet */
+}
+/* margin-top: auto skjuter priset längst ned i kortet, även när texterna är olika långa.
+      Det gör att alla kort får samma layout. */
+.card__meta {
+  margin: auto 0 0;  /* luft UTANFÖR elementet (kort form: upp höger ned vänster) */
+  padding-top: var(--space-2);  /* luft inuti upptill */
+  font-size: 1.1rem;  /* textstorlek */
+  font-weight: 800;  /* tjocklek: 400 normal, 700 fet, 800 extra fet */
+  color: var(--color-primary);  /* textfärg */
+}
+
+/* ===== Så går det till ===== */
+/* CSS-räknare: counter-reset nollställer, counter-increment räknar upp (längre ned).
+      Siffrorna finns alltså inte i HTML. */
+.steps {
+  counter-reset: steg;  /* startar en räknare på noll */
+  display: grid;  /* barnen läggs i ett rutnät */
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));  /* så många kolumner som ryms, var och en minst så bred som minmax anger */
+  gap: var(--space-3);  /* avstånd mellan barnen */
+  list-style: none;  /* tar bort punkter och siffror */
+  margin: var(--space-3) 0 0;  /* luft UTANFÖR elementet (kort form: upp höger ned vänster) */
+  padding: 0;  /* luft INUTI elementet */
+}
+/* Varje steg räknar upp räknaren 'steg' med ett. */
+.steps li {
+  counter-increment: steg;  /* räknar upp räknaren med ett */
+  background: var(--color-surface);  /* bakgrund */
+  border-radius: var(--radius);  /* rundade hörn (50 % = cirkel, 999px = piller) */
+  padding: var(--space-3);  /* luft INUTI elementet */
+}
+/* ::before skapar cirkeln med siffran. content: counter(steg) skriver ut räknarens värde.
+      place-items: center centrerar siffran i både höjd och bredd. border-radius: 50% gör det rundat. */
+.steps li::before {
+  content: counter(steg);  /* texten som ::before/::after visar */
+  display: grid;  /* barnen läggs i ett rutnät */
+  place-items: center;  /* centrerar både lodrätt och i sidled */
+  width: 2.75rem;  /* bredd */
+  height: 2.75rem;  /* höjd */
+  margin-bottom: var(--space-2);  /* luft under */
+  border-radius: 50%;  /* rundade hörn (50 % = cirkel, 999px = piller) */
+  background: var(--color-accent);  /* bakgrund */
+  color: var(--color-ink);  /* textfärg */
+  font-weight: 800;  /* tjocklek: 400 normal, 700 fet, 800 extra fet */
+}
+
+/* ===== Prislista ===== */
+/* Tabellen. border-collapse slår ihop cellernas ramar. overflow: hidden klipper hörnen
+      så att de följer border-radius. */
+.prices {
+  width: 100%;  /* bredd */
+  border-collapse: collapse;  /* slår ihop cellernas ramar */
+  background: var(--color-surface);  /* bakgrund */
+  border: 1px solid var(--color-line);  /* ram: tjocklek stil färg */
+  border-radius: var(--radius);  /* rundade hörn (50 % = cirkel, 999px = piller) */
+  overflow: hidden;  /* vad som händer med innehåll som sticker ut */
+}
+/* Tabellens rubrik. Skärmläsare läser upp den först. Finns i HTML som <caption>. */
+.prices caption { text-align: left; color: var(--color-muted); padding-bottom: var(--space-1); }
+/* Luft i cellerna. Rubrik- och datacell delar stil. */
+.prices th, .prices td { text-align: left; padding: var(--space-2) var(--space-3); }
+/* Mörk rubrikrad med vit text. */
+.prices thead th { background: var(--color-deep); color: #fff; }
+/* Syskonväljaren '+': gäller varje rad som kommer EFTER en annan rad,
+      alltså alla utom den första. Då blir det linjer mellan raderna men inte ovanför den första. */
+.prices tbody tr + tr { border-top: 1px solid var(--color-line); }
+/* Markerar raden som musen är över. */
+.prices tbody tr:hover { background: var(--color-bg); }
+
+/* ===== Öppettider och adress ===== */
+/* Öppettider och adress bredvid varandra när det ryms, annars under varandra. */
+.two-col {
+  display: grid;  /* barnen läggs i ett rutnät */
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));  /* så många kolumner som ryms, var och en minst så bred som minmax anger */
+  gap: var(--space-5);  /* avstånd mellan barnen */
+}
+/* Varje rad: dag till vänster, tid till höger (space-between). Understrykning mellan raderna. */
+.hours div {
+  display: flex;  /* barnen läggs på en rad (flexbox) */
+  justify-content: space-between;  /* så långt isär som möjligt */
+  gap: var(--space-2);  /* avstånd mellan barnen */
+  padding-block: var(--space-1);  /* luft inuti, upptill och nedtill */
+  border-bottom: 1px solid var(--color-line);  /* linje under */
+}
+/* dt är termen (veckodagen) i beskrivningslistan dl. */
+.hours dt { font-weight: 700; }
+/* dd är beskrivningen (tiden). Webbläsaren ger dd en vänstermarginal som vi tar bort. */
+.hours dd { margin: 0; }
+/* address har kursiv stil som standard. Vi vill ha vanlig text. */
+address { font-style: normal; font-weight: 700; margin-bottom: var(--space-2); }
+
+/* ===== Call to action och sidfot ===== */
+/* Foto som bakgrund med mörkt lager ovanpå: en linear-gradient med samma färg i start och slut
+      fungerar som 'overlay'. url('../images/hero.jpg'): ../ går en mapp upp från css/ till images/.
+      center 60% / cover: placering, sedan storlek. Overlayen gör att vit text når 13:1 i kontrast. */
+.cta {
+  background:
+    linear-gradient(rgb(13 27 20 / 0.8), rgb(13 27 20 / 0.8)),
+    url("../images/hero.jpg") center 60% / cover;
+  color: #fff;  /* textfärg */
+  text-align: center;  /* textjustering */
+  padding-block: var(--space-6);  /* luft inuti, upptill och nedtill */
+}
+/* Descendantväljare: bara .actions som ligger inuti .cta. Centrerar knapparna. */
+.cta .actions { justify-content: center; }
+/* Sidfot med mörk bakgrund och dämpad textfärg. */
+.footer {
+  background: var(--color-ink);  /* bakgrund */
+  color: #C9D3CC;  /* textfärg */
+  padding-block: var(--space-3);  /* luft inuti, upptill och nedtill */
+  font-size: 0.9rem;  /* textstorlek */
+}
+/* Ta bort p:s standardmarginal så att sidfoten inte blir för hög. */
+.footer p { margin: 0; }
+
+/* ===== Responsivt ===== */
+/* Media query: reglerna nedan gäller bara när fönstret är högst 40rem (640 px) brett.
+      Vi använder rem, inte px, så att brytpunkten följer användarens textstorlek.
+      Mycket är redan responsivt tack vare auto-fit, så här behövs bara lite. */
+@media (max-width: 40rem) {
+  /* Flexbox: logga till vänster och meny till höger på samma rad. */
+  .header__inner { flex-direction: column; gap: 0; }
+  /* Menyn är en lista (ul). Vi tar bort punkterna och lägger länkarna på en rad. */
+  .nav { gap: 0; flex-wrap: wrap; justify-content: center; }
+  /* Varje sektion får luft upptill och nedtill. */
+  .section { padding-block: var(--space-5); }
+  /* Flera bakgrunder, kommaseparerade: överst en ljusgrön 'glöd' (radial-gradient),
+        underst en enfärgad mörk. Texten blir vit, kontrasten 17,7:1. */
+  .hero { padding-block: var(--space-4) var(--space-5); }
+  /* Luft i cellerna. Rubrik- och datacell delar stil. */
+  .prices th, .prices td { padding: var(--space-1) var(--space-2); font-size: 0.95rem; }
+}
+
+/* ===== Lite liv ===== */
+/* Mjuk scroll bara för den som INTE bett operativsystemet minska rörelser. */
+@media (prefers-reduced-motion: no-preference) {
+  /* scroll-padding-top: när man hoppar till en ankarlänk (#priser) stannar sidan
+        5rem före rubriken, så att den fasta headern inte döljer den. */
+  html { scroll-behavior: smooth; }
+}
+
+/* Övergångar: när hover ändrar värden sker det på 0,2 sekunder i stället för direkt. */
+.card, .btn { transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; }
+/* Kortet lyfts 4px och får skugga. translateY flyttar utan att påverka layouten runt omkring. */
+.card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+/* Knappen lyfts 2px. */
+.btn:hover { transform: translateY(-2px); }
+
+/* Den som valt 'minska rörelser' i sitt system får ingen animation alls.
+      Detta är en tillgänglighetsfråga: rörelse kan ge yrsel och illamående. */
+@media (prefers-reduced-motion: reduce) {
+  .card, .btn { transition: none; }
+  .card:hover, .btn:hover { transform: none; }
 }

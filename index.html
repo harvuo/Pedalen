@@ -1,94 +1,115 @@
 <!doctype html>
+<!-- Raden ovan (doctype) talar om att det är modern HTML (HTML5) och ska alltid stå allra först. lang anger språk. Skärmläsare väljer rätt uttal, och Google och webbläsare vet vilket språk sidan har. -->
 <html lang="sv">
+    <!-- head: sådant som inte syns på sidan men som webbläsare och sökmotorer läser. -->
     <head>
+        <!-- Teckenkodning. Utan den kan å, ä och ö bli konstiga tecken. Ska ligga högt upp. -->
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- Title, webbläsarflik, unik för varje sida -->
-        <title>Pedalen cykelverkstad i Stockholm</title>
-        <!-- Beskrivning av sidan, syns i google/AI sök -->
+        <!-- Utan den visar mobilen sidan som en förminskad datorsida. Måste finnas för responsiv design. -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Titeln visas i webbläsarfliken, i bokmärken och som rubrik i Google. Unik för varje sida. -->
+        <title>Pedalen Cykelverkstad i Stockholm</title>
+        <!-- Texten Google ofta visar under titeln i sökresultatet. Ungefär 150 tecken. -->
         <meta
             name="description"
-            content="Pedalen lagar och servar alla sorters cyklar i Stocholm. boka service eller se våra priser"
+            content="Pedalen lagar och servar alla sorters cyklar i Stockholm. Boka service eller se våra priser."
         />
-        <!-- Favicon, logga exempelvis, syns i fliken -->
-        <link
-            rel="shortcut icon"
-            href="images/favicon.svg"
-            type="image/x-icon"
-        />
+        <!-- Ikonen i webbläsarfliken. SVG är skarp i alla storlekar. Sökvägen är relativ till index.html. -->
+        <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
         <link rel="stylesheet" href="css/style.css" />
     </head>
+    <!-- body: allt som syns på sidan. -->
     <body>
-        <!-- Hoppa över länk , det är det första som får fokus när man trycker Tab, låter
-         besökaren hoppa över meny -->
-        <a href="#innehall" class="skip">Hoppa till innehållet</a>
+        <!-- Hoppa-länk: den första som får fokus när man trycker Tab. Låter den som navigerar med tangentbord
+        hoppa över menyn. Länken pekar på id="innehall" längre ned. Syns bara när den har fokus. -->
+        <a class="skip" href="#innehall">Hoppa till innehållet</a>
+
+        <!-- header: sidhuvudet. Skärmläsare kan hoppa direkt hit (landmärke). -->
         <header class="header">
-            <div class="container header_inner">
-                <a href="index.html" class="logo">Pedalen</a>
-                <!-- Aria-label, förklarar för skärmläsaren vad menyn heter -->
+            <!-- div har ingen betydelse i sig, den är bara en ruta att styla. Klasserna: container centrerar och begränsar bredden. -->
+            <div class="container header__inner">
+                <!-- Loggan länkar till startsidan. Relativ länk, inte /index.html, så att det funkar på GitHub Pages. -->
+                <a class="logo" href="index.html">Pedalen</a>
+                <!-- nav: huvudnavigering. aria-label ger menyn ett namn som skärmläsare läser upp,
+            viktigt om det finns fler menyer på sidan (till exempel i sidfoten). -->
                 <nav aria-label="Huvudmeny">
-                    <!-- Menyn är en lista, skärmläsaren säger "Lista med xxx punkter" -->
+                    <!-- Menyn är en lista. Skärmläsare säger 'lista med 4 punkter', så att man vet hur lång den är. -->
                     <ul class="nav">
+                        <!-- Ankarlänk: # följt av ett id. Webbläsaren scrollar till elementet med det id:t. -->
                         <li><a href="#tjanster">Tjänster</a></li>
                         <li><a href="#priser">Priser</a></li>
-                        <li><a href="#oppetider">Öppetider</a></li>
+                        <li><a href="#oppettider">Öppettider</a></li>
                         <li><a href="#kontakt">Kontakt</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
-        <!-- Låter hoppa över gå direkt till main genom länken "innehall" -->
+
+        <!-- main: sidans unika huvudinnehåll. Bara ett per sida. id används av hoppa-länken. -->
         <main id="innehall">
-            <!-- 1. Section Hero -->
+            <!-- section: ett tematiskt avsnitt. Klassen on-dark byter fokusfärg på mörk bakgrund. Flera klasser skiljs åt med mellanslag. -->
             <section class="hero on-dark">
                 <div class="container hero__inner">
-                    <p class="eyebrow">cykelverkstad i Stockholm</p>
-                    <h1>Servad och redo för nästa åktur</h1>
-                    <p class="lead">
-                        Landsväg, stad eller singletrack. Vi lagar, servar och
-                        trimmar alla sorters cyklar. Lämna in på morgonen, hämta
-                        på eftermiddagen.
-                    </p>
-                    <p class="actions">
-                        <a class="btn btn--primary" href="#kontakt"
-                            >Boka service</a
-                        >
-                        <a class="btn btn--ghost" href="#kontakt"
-                            >Boka service</a
-                        >
-                    </p>
+                    <div class="hero__text">
+                        <!-- Liten etikett ovanför rubriken. -->
+                        <p class="eyebrow">Cykelverkstad i Stockholm</p>
+                        <!-- Sidans enda h1. Beskriver vad sidan handlar om och hjälper både läsare och sökmotorer. -->
+                        <h1>Servad och redo för nästa åktur</h1>
+                        <!-- Ingress: en kort mening som förklarar rubriken. -->
+                        <p class="lead">
+                            Landsväg, stad eller singletrack. Vi lagar, servar
+                            och trimmar alla sorters cyklar. Lämna in på
+                            morgonen, hämta på eftermiddagen.
+                        </p>
+                        <!-- Knapparna är LÄNKAR (a) som formas till knappar med CSS: de går någonstans. En riktig <button> använder man för åtgärder, till exempel att skicka ett formulär. -->
+                        <p class="actions">
+                            <a class="btn btn--primary" href="#kontakt"
+                                >Boka service</a
+                            >
+                            <a class="btn btn--ghost" href="#priser"
+                                >Se priser</a
+                            >
+                        </p>
+                    </div>
+                    <!-- figure och figcaption: en bild med bildtext som hör ihop. -->
+                    <figure class="hero__media">
+                        <!-- src: sökväg till bilden. alt: texten för den som inte ser bilden, och beskriver INNEHÅLLET. width och height
+                (bildens riktiga mått) låter webbläsaren reservera plats innan bilden laddats, så att sidan inte hoppar. CSS bestämmer sedan storleken. -->
+                        <img
+                            src="images/hero.jpg"
+                            alt="Mountainbikecyklist i luften mellan höga granar, med solen bakom trädtopparna"
+                            width="960"
+                            height="1440"
+                        />
+                        <!-- Bildtexten, formad till ett märke med CSS. -->
+                        <figcaption class="badge">
+                            Grundservice klar samma dag
+                        </figcaption>
+                    </figure>
                 </div>
-                <!-- figure och figcaption, en bild med bildtext som hör ihop -->
-                <figure class="hero_media">
-                    <img
-                        src="images/hero.jpg"
-                        alt="Mountainbikecyklist i luften mellan höga granar, med solen bakom trädtopparna"
-                        width="960"
-                        height="1440"
-                    />
-                    <figcaption class="badge">
-                        Grundservice klar samma dag
-                    </figcaption>
-                </figure>
             </section>
-            <!-- 2. Section Stats  -->
+
+            <!-- aria-label ger sektionen ett namn för skärmläsare när den saknar synlig rubrik. -->
             <section class="stats" aria-label="Pedalen i korthet">
                 <div class="container">
                     <ul class="stats__list">
-                        <li><strong>30 min</strong>Reparation av punktering</li>
-                        <li><strong>Samma dag</strong>Grundservice</li>
-                        <li><strong>Sex dagar</strong>Öppet varje vecka</li>
+                        <li><strong>30 min</strong> Punktering</li>
+                        <li><strong>Samma dag</strong> Grundservice</li>
+                        <li><strong>Sex dagar</strong> Öppet varje vecka</li>
                     </ul>
                 </div>
             </section>
-            <!-- 3. Section services -->
+
+            <!-- id måste vara unikt på sidan. Det är målet för menylänken #tjanster. -->
             <section id="tjanster" class="section">
                 <div class="container">
                     <h2>Det här fixar vi</h2>
                     <p class="section__intro">
                         Från en liten punktering till en komplett genomgång.
                     </p>
+                    <!-- Korten är en lista, eftersom de är jämbördiga saker. Det ger bättre struktur än tre div. -->
                     <ul class="cards">
+                        <!-- Ett kort. Rubriknivån h3 följer på h2: hoppa aldrig över nivåer (h2 till h4). -->
                         <li class="card">
                             <h3>Punktering</h3>
                             <p>
@@ -97,7 +118,6 @@
                             </p>
                             <p class="card__meta">Från 195 kr</p>
                         </li>
-
                         <li class="card">
                             <h3>Grundservice</h3>
                             <p>
@@ -112,15 +132,17 @@
                                 Gaffel, dämpare, bromsar och drivlina trimmas
                                 för att klara skogen. Slitdelar byts vid behov.
                             </p>
-                            <p class="card__meta">Från 1495 kr</p>
+                            <p class="card__meta">Från 1 495 kr</p>
                         </li>
                     </ul>
                 </div>
             </section>
-            <!-- 4. Section Instructions -->
-            <section class="section section-tint">
+
+            <!-- Samma section-klass som övriga, plus en modifierare för annan bakgrund. -->
+            <section class="section section--tint">
                 <div class="container">
                     <h2>Så går det till</h2>
+                    <!-- ol: numrerad lista. Ordningen spelar roll här. Siffrorna ritas av CSS-räknare, inte av HTML. -->
                     <ol class="steps">
                         <li><strong>Boka</strong> en tid eller kom förbi.</li>
                         <li>
@@ -134,27 +156,118 @@
                     </ol>
                 </div>
             </section>
-            <!-- 5. Section contact -->
-            <section class="cta on-dark" id="kontakt">
+
+            <section id="priser" class="section">
+                <div class="container">
+                    <h2>Priser</h2>
+                    <!-- Tabell används för riktig tabelldata (rader och kolumner), aldrig för layout. -->
+                    <table class="prices">
+                        <!-- caption: tabellens rubrik. Skärmläsare läser upp den först. -->
+                        <caption>
+                            Exempelpriser inklusive moms
+                        </caption>
+                        <!-- thead: rubrikraden. tbody: själva datan. -->
+                        <thead>
+                            <!-- th scope="col": rubrikcell för en kolumn. Skärmläsare säger 'Pris: 195 kr' i stället för bara '195 kr'. -->
+                            <tr>
+                                <th scope="col">Tjänst</th>
+                                <th scope="col">Pris</th>
+                                <th scope="col">Tid</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- th scope="row": rubrikcell för en rad, så att varje cell förstås tillsammans med sin rad. -->
+                            <tr>
+                                <th scope="row">Punktering</th>
+                                <td>195 kr</td>
+                                <td>30 min</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Grundservice</th>
+                                <td>395 kr</td>
+                                <td>Samma dag</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Stor service</th>
+                                <td>995 kr</td>
+                                <td>1–2 dagar</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Elcykelservice</th>
+                                <td>1 295 kr</td>
+                                <td>1–2 dagar</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Mountainbikeservice</th>
+                                <td>1 495 kr</td>
+                                <td>1–2 dagar</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="oppettider" class="section section--tint">
+                <div class="container two-col">
+                    <div>
+                        <h2>Öppettider</h2>
+                        <!-- dl är en beskrivningslista: dt är termen (dag) och dd är beskrivningen (tid). Passar par av namn och värde. -->
+                        <dl class="hours">
+                            <div>
+                                <dt>Måndag–fredag</dt>
+                                <dd>08.00–17.00</dd>
+                            </div>
+                            <div>
+                                <dt>Lördag</dt>
+                                <dd>10.00–14.00</dd>
+                            </div>
+                            <div>
+                                <dt>Söndag</dt>
+                                <dd>Stängt</dd>
+                            </div>
+                        </dl>
+                    </div>
+                    <div>
+                        <h2>Hitta hit</h2>
+                        <!-- address är till för kontaktuppgifter. br är en radbrytning, och används bara när radbrytningen är en del av innehållet. -->
+                        <address>Cykelgatan 12<br />123 45 Stockholm</address>
+                        <p>
+                            Tre minuters promenad från tunnelbanan.
+                            Cykelparkering finns utanför dörren.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sista sektionen med uppmaning till handling (call to action). -->
+            <section id="kontakt" class="cta on-dark">
                 <div class="container cta__inner">
                     <h2>Redo att lämna in cykeln?</h2>
                     <p>Ring eller skriv, så hittar vi en tid som passar.</p>
                     <p class="actions">
+                        <!-- tel: ringer på mobilen. mailto: öppnar mejlprogrammet. Länktexten säger vad som händer. -->
                         <a class="btn btn--primary" href="tel:+4680000000"
-                            >Ring 08-0000000</a
+                            >Ring 08-000 00 00</a
                         >
                         <a
                             class="btn btn--ghost"
-                            href="mailto:verkstad@example.se"
-                            >Mail: verkstad@example.se</a
+                            href="mailto:verkstad@example.com"
+                            >verkstad@example.com</a
                         >
                     </p>
                 </div>
             </section>
         </main>
-        <!-- 6. Footer -->
-        <footer>
-            <div class="container">2026 Pedalen cykelverkstad.</div>
+
+        <!-- footer: sidfoten, ytterligare ett landmärke. -->
+        <footer class="footer">
+            <div class="container">
+                <!-- &copy; är tecknet ©. Specialtecken skrivs som entiteter i HTML. -->
+                <p>
+                    &copy; 2026 Pedalen Cykelverkstad. Fiktiv sida som byggts i
+                    utbildningssyfte.
+                </p>
+            </div>
         </footer>
     </body>
 </html>
